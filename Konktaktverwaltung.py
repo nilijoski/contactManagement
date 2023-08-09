@@ -21,11 +21,40 @@ file_path = 'contacts.csv'
 contacts = createContact(file_path)
 
 def show_contacts(contacts):
+    print()
+    count = 0
     for contact in contacts:
-        print(f"Name: {contact.name}")
-        print(f"Lastname: {contact.lastname}")
-        print(f"Phone: {contact.phone}")
-        print(f"Email: {contact.email}")
-        print()
+        count += 1
+        print(f"{count} {contact.name} {contact.lastname} {contact.phone} {contact.email}")
 
-show_contacts(contacts)
+def remove_contact(contacts):
+    name = input("Enter the name of the contact to delete: ")
+    lastname = input("Enter the lastname of the contact to delete: ")
+    deleted = False
+    for contact in contacts:
+        if contact.name == name and contact.lastname == lastname:
+            contacts.remove(contact)
+            deleted = True
+            break
+    if(deleted):
+        print(f"\nContact '{name} {lastname}' has been deleted.")
+    else:
+        print(f"\nContact '{name} {lastname}' not found.")
+
+        
+def on_start():
+    while True:
+        print("\nWelcome to Contacts Menu\n\nPlease choose one of the following actions by pressing the corresponded number:")
+        print("1. Show all contacts")
+        print("2. Delete contact")
+        print("3. Edit contact")
+        action = input("Please choose: ")
+        if (action == '1'):
+            show_contacts(contacts)
+        elif (action == '2'):
+            remove_contact(contacts)
+
+
+
+on_start()
+
