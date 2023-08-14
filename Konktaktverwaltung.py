@@ -19,6 +19,13 @@ def createContact(file_path):
 
 file_path = 'contacts.csv'
 contacts = createContact(file_path)
+    
+def saveContacts(contacts):
+    with open(file_path, 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        for contact in contacts:
+            csv_writer.writerow([contact.name, contact.lastname, contact.phone, contact.email])
+
 
 def show_contacts(contacts):
     print()
@@ -38,6 +45,8 @@ def remove_contact(contacts):
             break
     if(deleted):
         print(f"\nContact '{name} {lastname}' has been deleted.")
+        saveContacts(contacts)
+        
     else:
         print(f"\nContact '{name} {lastname}' not found.")
 
@@ -53,8 +62,9 @@ def on_start():
             show_contacts(contacts)
         elif (action == '2'):
             remove_contact(contacts)
+        elif(action == '3'):
+            print("in work...")
 
 
 
 on_start()
-
