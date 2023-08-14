@@ -18,13 +18,9 @@ def createContact(file_path):
             contact = Contact(name, lastname, phone, email)
             contact_objects.append(contact)
     return contact_objects
-    
-def saveContacts(contacts):
-    with open(file_path, 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        for contact in contacts:
-            csv_writer.writerow([contact.name, contact.lastname, contact.phone, contact.email])
 
+file_path = 'contacts.csv'
+contacts = createContact(file_path)
 
 def show_contacts(contacts):
     print()
