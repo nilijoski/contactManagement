@@ -87,6 +87,7 @@ def on_start():
         print("1. Show all contacts")
         print("2. Delete contact")
         print("3. Add contact")
+        print("4. Edit contact")
         action = input("Please choose: ")
         if action == '1':
             show_contacts(contacts)
