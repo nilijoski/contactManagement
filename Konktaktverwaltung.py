@@ -16,14 +16,13 @@ def createContact(file_path):
             name, lastname, phone, email = row
             contact = Contact(name, lastname, phone, email)
             contact_objects.append(contact)
-    return contact_objects
-    
+    return contact_objects 
+
 def saveContacts(contacts):
     with open(file_path, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         for contact in contacts:
             csv_writer.writerow([contact.name, contact.lastname, contact.phone, contact.email])
-
 
 def show_contacts(contacts):
     print()
@@ -44,26 +43,34 @@ def remove_contact(contacts):
     if(deleted):
         print(f"\nContact '{name} {lastname}' has been deleted.")
         saveContacts(contacts)
-        
     else:
         print(f"\nContact '{name} {lastname}' not found.")
 
-        
+def add_contact(contacts):
+    name = input(f"Please enter the name: ")
+    lastname = input(f"Please enter the lastname: ")
+    phone = input(f"Please enter the phone number: ")
+    email = input(f"Please enter the email address: ")
+    
+    new_contact = Contact(name, lastname, phone, email)
+    contacts.append(new_contact)
+    saveContacts(contacts)
+    
 def on_start():
     contacts = createContact(file_path)
+    
     while True:
         print("\nWelcome to Contacts Menu\n\nPlease choose one of the following actions by pressing the corresponded number:")
         print("1. Show all contacts")
         print("2. Delete contact")
-        print("3. Edit contact")
+        print("3. Add contact")
         action = input("Please choose: ")
-        if (action == '1'):
+        if action == '1':
             show_contacts(contacts)
-        elif (action == '2'):
+        elif action == '2':
             remove_contact(contacts)
-        elif(action == '3'):
-            print("in work...")
-
+        elif action == '3':
+            add_contact(contacts)
 
 
 on_start()
