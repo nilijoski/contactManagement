@@ -55,7 +55,30 @@ def add_contact(contacts):
     new_contact = Contact(name, lastname, phone, email)
     contacts.append(new_contact)
     saveContacts(contacts)
-    
+
+def edit_contact(contacts):
+    name_to_edit = input("Enter the name of the contact to edit: ")
+    lastname_to_edit = input("Enter the lastname of the contact to edit: ")
+
+    for contact in contacts:
+        if contact.name == name_to_edit and contact.lastname == lastname_to_edit:
+            new_name = input("Enter the new name: ")
+            new_lastname = input("Enter the new lastname: ")
+            new_phone = input("Enter the new phone number: ")
+            new_email = input("Enter the new email address: ")
+
+            contact.name = new_name
+            contact.lastname = new_lastname
+            contact.phone = new_phone
+            contact.email = new_email
+
+            saveContacts(contacts)
+            print(f"\nContact '{name_to_edit} {lastname_to_edit}' has been updated.")
+            return
+
+    print(f"\nContact '{name_to_edit} {lastname_to_edit}' not found.")
+
+
 def on_start():
     contacts = createContact(file_path)
     
@@ -71,6 +94,8 @@ def on_start():
             remove_contact(contacts)
         elif action == '3':
             add_contact(contacts)
+        elif action == '4':
+            edit_contact(contacts)
 
 
 on_start()
