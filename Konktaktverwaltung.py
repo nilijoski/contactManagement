@@ -1,5 +1,7 @@
 import csv
 
+
+file_path = 'contacts.csv'
 class Contact:
     def __init__(self, name, lastname, phone, email):
         self.name = name
@@ -16,9 +18,13 @@ def createContact(file_path):
             contact = Contact(name, lastname, phone, email)
             contact_objects.append(contact)
     return contact_objects
+    
+def saveContacts(contacts):
+    with open(file_path, 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        for contact in contacts:
+            csv_writer.writerow([contact.name, contact.lastname, contact.phone, contact.email])
 
-file_path = 'contacts.csv'
-contacts = createContact(file_path)
 
 def show_contacts(contacts):
     print()
@@ -38,11 +44,14 @@ def remove_contact(contacts):
             break
     if(deleted):
         print(f"\nContact '{name} {lastname}' has been deleted.")
+        saveContacts(contacts)
+        
     else:
         print(f"\nContact '{name} {lastname}' not found.")
 
         
 def on_start():
+    contacts = createContact(file_path)
     while True:
         print("\nWelcome to Contacts Menu\n\nPlease choose one of the following actions by pressing the corresponded number:")
         print("1. Show all contacts")
@@ -53,8 +62,9 @@ def on_start():
             show_contacts(contacts)
         elif (action == '2'):
             remove_contact(contacts)
+        elif(action == '3'):
+            print("in work...")
 
 
 
 on_start()
-
