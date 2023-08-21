@@ -84,7 +84,6 @@ def edit_contact(contacts):
 def on_start():
     contacts = createContact(file_path)
     while True:
-        os.system('cls')
         print("\nWelcome to Contacts Menu\n\nPlease choose one of the following actions by pressing the corresponded number:")
         print("1. Show all contacts")
         print("2. Delete contact")
