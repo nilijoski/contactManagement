@@ -1,4 +1,5 @@
 import csv
+import os
 
 file_path = 'contacts.csv'
 
@@ -41,7 +42,10 @@ def show_contacts(contacts):
 
 
 def remove_contact(contacts):
+    print("(Press ENTER to exit to main menu)")
     name = input("Enter the name of the contact to delete: ")
+    if (name == ''):
+        return
     lastname = input("Enter the lastname of the contact to delete: ")
     deleted = False
     for contact in contacts:
@@ -57,18 +61,24 @@ def remove_contact(contacts):
 
 
 def add_contact(contacts):
+    print("(Press ENTER to exit to main menu)")
     name = input(f"Please enter the name: ")
+    if (name == ''):
+        return
     lastname = input(f"Please enter the lastname: ")
     phone = input(f"Please enter the phone number: ")
     email = input(f"Please enter the email address: ")
 
     new_contact = Contact(name, lastname, phone, email)
     contacts.append(new_contact)
+    print(f"\nContact '{name} {lastname}' has been added.")
     saveContacts(contacts)
 
 
 def edit_contact(contacts):
     name_to_edit = input("Enter the name of the contact to edit: ")
+    if (name_to_edit == ''):
+        return
     lastname_to_edit = input("Enter the lastname of the contact to edit: ")
 
     for contact in contacts:
@@ -109,6 +119,5 @@ def on_start():
             add_contact(contacts)
         elif action == '4':
             edit_contact(contacts)
-
 
 on_start()
