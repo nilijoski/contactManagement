@@ -1,12 +1,15 @@
 import csv
 
 file_path = 'contacts.csv'
+
+
 class Contact:
     def __init__(self, name, lastname, phone, email):
         self.name = name
         self.lastname = lastname
         self.phone = phone
         self.email = email
+
 
 def createContact(file_path):
     contact_objects = []
@@ -16,20 +19,26 @@ def createContact(file_path):
             name, lastname, phone, email = row
             contact = Contact(name, lastname, phone, email)
             contact_objects.append(contact)
-    return contact_objects 
+    return contact_objects
+
 
 def saveContacts(contacts):
     with open(file_path, 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_file, delimiter=';',
+                                quotechar='"', quoting=csv.QUOTE_MINIMAL)
         for contact in contacts:
-            csv_writer.writerow([contact.name, contact.lastname, contact.phone, contact.email])
+            csv_writer.writerow(
+                [contact.name, contact.lastname, contact.phone, contact.email])
+
 
 def show_contacts(contacts):
     print()
     count = 0
     for contact in contacts:
         count += 1
-        print(f"{count} {contact.name} {contact.lastname} {contact.phone} {contact.email}")
+        print(
+            f"{count} {contact.name} {contact.lastname} {contact.phone} {contact.email}")
+
 
 def remove_contact(contacts):
     name = input("Enter the name of the contact to delete: ")
@@ -40,21 +49,23 @@ def remove_contact(contacts):
             contacts.remove(contact)
             deleted = True
             break
-    if(deleted):
+    if (deleted):
         print(f"\nContact '{name} {lastname}' has been deleted.")
         saveContacts(contacts)
     else:
         print(f"\nContact '{name} {lastname}' not found.")
+
 
 def add_contact(contacts):
     name = input(f"Please enter the name: ")
     lastname = input(f"Please enter the lastname: ")
     phone = input(f"Please enter the phone number: ")
     email = input(f"Please enter the email address: ")
-    
+
     new_contact = Contact(name, lastname, phone, email)
     contacts.append(new_contact)
     saveContacts(contacts)
+
 
 def edit_contact(contacts):
     name_to_edit = input("Enter the name of the contact to edit: ")
@@ -73,7 +84,8 @@ def edit_contact(contacts):
             contact.email = new_email
 
             saveContacts(contacts)
-            print(f"\nContact '{name_to_edit} {lastname_to_edit}' has been updated.")
+            print(
+                f"\nContact '{name_to_edit} {lastname_to_edit}' has been updated.")
             return
 
     print(f"\nContact '{name_to_edit} {lastname_to_edit}' not found.")
@@ -81,7 +93,7 @@ def edit_contact(contacts):
 
 def on_start():
     contacts = createContact(file_path)
-    
+
     while True:
         print("\nWelcome to Contacts Menu\n\nPlease choose one of the following actions by pressing the corresponded number:")
         print("1. Show all contacts")
